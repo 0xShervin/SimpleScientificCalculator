@@ -6,7 +6,7 @@ using namespace std;
 // function prototype
 int factorial(int);
 double power(double, int);
-double ePowerx(double);
+double ePowerx(int);
 double sigmaXPowern(double);
 double arcTan(double);
 
@@ -59,7 +59,7 @@ int factorial(int x)
 }//end of factorial function
 
 double power(double x, int tavan)
-{//this function calculate the power n of x
+{//this function calculates the power n of x
   double result = x;
 
   for (int i = 1; i < tavan; i++){
@@ -68,6 +68,15 @@ double power(double x, int tavan)
 
   return result;
 }//end of power function
+
+double ePowerx(int x)
+{//this function calculates the exponentiation of e
+	int result = 1;
+	for (int i = 1;i < 1200; i++){
+		result += power(x,i) / factorial(i);
+	}
+	return result;
+}//end of ePowerx function 
 
 double arcTan(double x)
 {//this function is used for calculating arctan(x)
