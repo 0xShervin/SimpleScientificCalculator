@@ -4,14 +4,14 @@
 using namespace std;
 
 // function prototype
-int factorial(int);
-double power(double, int);
-double ePowerx(int);
-double sigmaXPowern(double);
+double factorial(double);
+double power(double, double);
+double exp(double);
+double sigmaPowX(double);
 double arcTan(double);
 
 int main(){//main function in c++
-
+	
   int userChoice,x;
 
   cout << "1. e^x = 1 + x + (x^2)/2! + ..." << endl;
@@ -26,13 +26,13 @@ int main(){//main function in c++
   cin >> x;
 
   switch (userChoice) {
-    case 1:
 
-      cout << ePowerx(x);
+    case 1:
+      cout << exp(x);
       break;
 
     case 2:
-      cout << sigmaXPowern(x);
+      cout << sigmaPowX(x);
       break;
 
     case 3:
@@ -41,15 +41,16 @@ int main(){//main function in c++
 
     default:
       cout << "Invalid input!";
-  }
+	
+	}
 
   return 0;
 }//end of main function
 
 // function definition
-int factorial(int x)
+double factorial(double x)
 {//this function calculate the factorial of x
-  int result = 1;
+  double result = 1;
 
   for (int i = 2; i <= x; i++){
     result *= i;
@@ -58,33 +59,48 @@ int factorial(int x)
   return result;
 }//end of factorial function
 
-double power(double x, int tavan)
+double power(double x, double tavan)
 {//this function calculates the power n of x
-  double result = x;
+  double result = 1;
 
-  for (int i = 1; i < tavan; i++){
+  for (int i = 0; i < tavan; i++){
     result *= x;
   }
 
   return result;
 }//end of power function
 
-double ePowerx(int x)
-{//this function calculates the exponentiation of e
-	int result = 1;
-	for (int i = 1;i < 1200; i++){
+double exp(double x)
+{//this function calculates the exponentiation
+	double result = 0;
+
+	for (int i = 0;i < 20; i++){
 		result += power(x,i) / factorial(i);
+		cout << result << endl;
 	}
+	
 	return result;
-}//end of ePowerx function 
+}//end of exp function
+
+double sigmaPowX(double x)
+{//calculates sum of power x
+	double result = 0;
+	
+	for (int i = 0; i < 20; i++){
+		result += power(x,i);
+		cout << result << endl;
+	}
+	
+	return result;
+}//end of sigmaPowX
 
 double arcTan(double x)
 {//this function is used for calculating arctan(x)
     double result = 0;
 
-    for (int i = 1, j = 2; i < 1200 ; i+=2, j++)
-    {
+    for (int i = 3, j = 1; i < 42 ; i+=2, j++){
         result += ((power(x,i) / i)*(power(-1,j)));
+        cout << result << endl;
     }
 
     return result;
