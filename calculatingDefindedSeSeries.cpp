@@ -3,45 +3,59 @@
 
 using namespace std;
 
-// function prototype
+//function prototype
 double factorial(double);
 double power(double, double);
 double exp(double);
 double sigmaPowX(double);
 double arcTan(double);
 
+// struct of sersiese
+typedef struct 
+{
+	//this struct is not completed
+} series;
+
 int main(){//main function in c++
 	
-  int userChoice,x;
+	while (1){
+		int userChoice, x;
 
-  cout << "1. e^x = 1 + x + (x^2)/2! + ..." << endl;
-  cout << "2. 1 + x + x^2 + x^3 + ..." << endl;
-  cout << "3. arctan(x) = x - (x^3)/3 + (x^5)/5 - (x^7)/7 + ..." << endl;
-  cout << "\nPlease choose one of these to let me calculate it: " << endl;
+		
 
-  cin >> userChoice;
+		cout << "\a\n\n1. e^x = 1 + x + (x^2)/2! + ..." << endl;
+		cout << "2. 1 + x + x^2 + x^3 + ..." << endl;
+		cout << "3. arctan(x) = x - (x^3)/3 + (x^5)/5 - (x^7)/7 + ..." << endl;
+		cout << "\nPlease choose one of these to calculate it, " << endl;
+		cout << "or you can type -1 to exit the program:" << endl;
 
-  cout << "\nthen you should enter the x: " << endl;
+		cin >> userChoice;
+		
+		if (userChoice == -1)
+			break;
 
-  cin >> x;
+		cout << "\nthen you should enter the x: " << endl;
 
-  switch (userChoice) {
+		cin >> x;
 
-    case 1:
-      cout << exp(x);
-      break;
+		switch (userChoice) {
+			
+		case 1:
+		  cout << exp(x);
+		  break;
 
-    case 2:
-      cout << sigmaPowX(x);
-      break;
+		case 2:
+		  cout << sigmaPowX(x);
+		  break;
 
-    case 3:
-      cout << arcTan(x);
-      break;
+		case 3:
+		  cout << arcTan(x);
+		  break;
 
-    default:
-      cout << "Invalid input!";
-	
+		default:
+		  cout << "Invalid input!\nGive me a valid choice.";
+
+		}
 	}
 
   return 0;
@@ -76,7 +90,6 @@ double exp(double x)
 
 	for (int i = 0;i < 20; i++){
 		result += power(x,i) / factorial(i);
-		cout << result << endl;
 	}
 	
 	return result;
@@ -88,13 +101,13 @@ double sigmaPowX(double x)
 	
 	for (int i = 0; i < 20; i++){
 		result += power(x,i);
-		cout << result << endl;
 	}
 	
 	return result;
 }//end of sigmaPowX
 
 double arcTan(double x)
+//this function has some problems
 {//this function is used for calculating arctan(x)
     double result = 0;
 
