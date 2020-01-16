@@ -52,29 +52,28 @@ int main(){//main function in c++
 		
 		cout << "\nYour answer is : ";
 		switch (userChoice) {
-			
 		case 1:
-		  s.exp = exp(*ptrx);
-		  cout << s.exp;
-		  break;
+			s.exp = exp(*ptrx);
+			cout << s.exp;
+			break;
 
 		case 2:
-		  s.sgPowx = sigmaPowX(*ptrx);
-		  cout << s.sgPowx;
-		  break;
+			s.sgPowx = sigmaPowX(*ptrx);
+			cout << s.sgPowx;
+			break;
 
 		case 3:
-		  if (*ptrx <= 1 && *ptrx >= -1)
-			s.iTan = arcTan(*ptrx);
-		  else if (*ptrx > 1)
-		    s.iTan = 90 - arcTan(1 / *ptrx);
-		  else if (*ptrx < -1)
-		    s.iTan = -90 - arcTan(1 / *ptrx);
-		  cout << s.iTan;
-		  break;
+			if (*ptrx <= 1 && *ptrx >= -1)
+				s.iTan = arcTan(*ptrx);
+			else if (*ptrx > 1)
+				s.iTan = 90 - arcTan(1 / *ptrx);
+			else if (*ptrx < -1)
+				s.iTan = -90 - arcTan(1 / *ptrx);
+			cout << s.iTan;
+			break;
 
 		default:
-		  cout << "Invalid input!\n Please try again.";
+			cout << "Invalid input!\n Please try again.";
 
 		}
 	}
@@ -85,24 +84,24 @@ int main(){//main function in c++
 // function definition
 double factorial(double x)
 {//this function calculate the factorial of x
-  double result = 1;
+	double result = 1;
 
-  for (int i = 2; i <= x; i++){
-    result *= i;
-  }
+	for (int i = 2; i <= x; i++){
+		result *= i;
+	}
 
-  return result;
+	return result;
 }//end of factorial function
 
 double power(double x, double tavan)
 {//this function calculates the power n of x
-  double result = 1;
+	double result = 1;
 
-  for (int i = 0; i < tavan; i++){
-    result *= x;
-  }
+	for (int i = 0; i < tavan; i++){
+		result *= x;
+	}
 
-  return result;
+	return result;
 }//end of power function
 
 double exp(double x)
