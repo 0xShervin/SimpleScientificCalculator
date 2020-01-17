@@ -63,12 +63,7 @@ int main(){//main function in c++
 			break;
 
 		case 3:
-			if (*ptrx <= 1 && *ptrx >= -1)
-				s.iTan = arcTan(*ptrx);
-			else if (*ptrx > 1)
-				s.iTan = 90 - arcTan(1 / *ptrx);
-			else if (*ptrx < -1)
-				s.iTan = -90 - arcTan(1 / *ptrx);
+			s.iTan = arcTan(x);
 			cout << s.iTan;
 			break;
 
@@ -129,9 +124,33 @@ double sigmaPowX(double x)
 double arcTan(double x)
 {//this function is used for calculating arctan(x)
 	double result = 0;
-		
-	for (int i = 1, j = 2; i < 600; i+=2 , j++)
-		result += ((power(x,i) / i) * (power(-1,j)));
 	
-	return result * rtd;
+	if (x <= 1 && x >= -1){
+	
+		for (int i = 1, j = 2; i < 600; i+=2 , j++)
+			result += ((power(x,i) / i) * (power(-1,j)));
+	
+		result *= rtd;
+	}
+	
+	else if (x > 1){
+		x = 1 / x;
+		
+		for (int i = 1, j = 2; i < 600; i+=2 , j++)
+			result += ((power(x,i) / i) * (power(-1,j)));
+
+		result = 90 - result * rtd;
+	}
+
+	else if (x < -1){
+		x = 1 / x;
+
+		for (int i = 1, j = 2; i < 600; i+=2 , j++)
+			result += ((power(x,i) / i) * (power(-1,j)));
+		
+		result = -90 - result * rtd;
+	}
+	
+	return result;
+
 }//end of arctan function
