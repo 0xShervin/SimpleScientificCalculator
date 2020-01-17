@@ -1,6 +1,7 @@
 //this program helps us to calculate some common serieses
 
 #include <iostream>
+#include <stdio.h>
 
 using namespace std;
 
@@ -10,10 +11,13 @@ double power(double, double);
 double exp(double);
 double sigmaPowX(double);
 double arcTan(double);
+double calculate_answer(int, double);
+void read_file(int &, double &);
+void write_file(int , double);
 
 // struct of sersiese
 typedef struct 
-{
+{//this structure is used to create three data types for serieses
 	double exp;
 	double sgPowx;
 	double iTan;
@@ -27,54 +31,47 @@ int main(){//main function in c++
 	while (1){
 
 		int userChoice;
-		double x, * ptrx = &x;
-		series s;
+		double x, *ptrx = &x;
+		char fileAvailability;
 		
 		cout << "\n-------------------------------------" << endl;
-		cout << "\n1. e^x = 1 + x + (x^2)/2! + ..." << endl;
+		cout << "\n0. (for exiting the program)" << endl;
+		cout << "1. e^x" << endl;
 		cout << "2. 1 + x + x^2 + x^3 + ..." << endl;
-		cout << "3. arctan(x) = x - (x^3)/3 + (x^5)/5 - (x^7)/7 + ..." << endl;
-		cout << "\nPlease choose one of these to calculate it, " << endl;
-		cout << "or you can type 0 to exit the program: ";
+		cout << "3. arctan(x)" << endl;
+		cout << "\nIs there any file?(y|n) ";
+		cin >> fileAvailability;
 
-		cin >> userChoice;
+		if (fileAvailability == 'y')
+			read_file(userChoice, x);
+
+		else{
+			cout << "\nThen you should choose one of the above things: ";
+			cin >> userChoice;
+		}
 		
 		if (userChoice == 0)
 			break;
+		
 		else if ( userChoice < 1 || userChoice > 3){
 			cout << "\ninvalid choice! Try again.";
 			continue;
 		}
-
-		cout << "\nthen you should enter the x: ";
-
-		cin >> x;
 		
-		cout << "\nYour answer is : ";
-		switch (userChoice) {
-		case 1:
-			s.exp = exp(*ptrx);
-			cout << s.exp;
-			break;
+		if (fileAvailability == 'n'){
+			cout << "\nThen you should enter the x: ";
+			cin >> x;
+			cout << "\nYour answer is : ";
+			cout << calculate_answer(userChoice, *ptrx);
+		}
 
-		case 2:
-			s.sgPowx = sigmaPowX(*ptrx);
-			cout << s.sgPowx;
-			break;
-
-		case 3:
-			s.iTan = arcTan(x);
-			cout << s.iTan;
-			break;
-
-		default:
-			cout << "Invalid input!\n Please try again.";
-
+		else {
+			write_file(userChoice, *ptrx);
+			cout << "Your answer was writen in a file which is named \"output.txt\".";
 		}
 	}
-
   return 0;
-}//end of main function
+}
 
 // function definition
 double factorial(double x)
@@ -86,7 +83,7 @@ double factorial(double x)
 	}
 
 	return result;
-}//end of factorial function
+}
 
 double power(double x, double tavan)
 {//this function calculates the power n of x
@@ -97,7 +94,7 @@ double power(double x, double tavan)
 	}
 
 	return result;
-}//end of power function
+}
 
 double exp(double x)
 {//this function calculates the exponentiation
@@ -108,7 +105,7 @@ double exp(double x)
 	}
 	
 	return result;
-}//end of exp function
+}
 
 double sigmaPowX(double x)
 {//calculates sum of power x
@@ -119,7 +116,7 @@ double sigmaPowX(double x)
 	}
 	
 	return result;
-}//end of sigmaPowX
+}
 
 double arcTan(double x)
 {//this function is used for calculating arctan(x)
@@ -153,4 +150,52 @@ double arcTan(double x)
 	
 	return result;
 
-}//end of arctan function
+}
+
+double calculate_answer(int userChoice, double x)
+{//this function is used to calculate the answer in the console
+	series s;
+
+	switch (userChoice) {
+	case 1:
+		s.exp = exp(x);
+		return s.exp;
+		break;
+
+	case 2:
+		s.sgPowx = sigmaPowX(x);
+		return s.sgPowx;
+		break;
+
+	case 3:
+		s.iTan = arcTan(x);
+		return s.iTan;
+		break;
+
+	}
+	return 0;
+}
+
+void read_file(int &UC, double &x)
+{//this function is used to read a file 
+	FILE * fptr;
+
+	fptr = fopen("input.txt", "r");
+
+	fscanf(fptr, "%d %lf", &UC, &x);
+
+	fclose(fptr);
+}
+
+void write_file(int UC, double x)
+{//this function is used to write the answer into a file
+	FILE * fptr;
+	double answer = calculate_answer(UC, x);
+
+	fptr = fopen("output.txt", "w");
+
+	fprintf(fptr, "Your answer is : %lf", answer);
+
+	fclose(fptr);
+
+}
