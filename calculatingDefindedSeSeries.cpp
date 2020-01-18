@@ -24,8 +24,6 @@ typedef struct
 	
 } series;
 
-const double rtd = 180.000 / 3.1415926536;//this constant variable is used to change radiant to degree
-
 int main(){//main function in c++
 	
 	while (1){
@@ -120,6 +118,7 @@ double sigmaPowX(double x)
 
 double arcTan(double x)
 {//this function is used for calculating arctan(x)
+	const double rtd = 180.000 / 3.1415926536;//this constant variable is used to change radiant to degree
 	double result = 0;
 	
 	if (x <= 1 && x >= -1){
@@ -153,7 +152,7 @@ double arcTan(double x)
 }
 
 double calculate_answer(int userChoice, double x)
-{//this function is used to calculate the answer in the console
+{//this function is used to calculate the answer of user's choice
 	series s;
 
 	switch (userChoice) {
